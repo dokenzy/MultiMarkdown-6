@@ -39,3 +39,5 @@ test/a.out
 /mmd-swift.xcodeproj
 
 *.orig
+texmf/tex/latex/mmd6-orig
+mmd6.zip
