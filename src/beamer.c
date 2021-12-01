@@ -206,18 +206,18 @@ void mmd_export_token_beamer(DString * out, const char * source, token * t, scra
 					break;
 				}
 
-				printf("\\begin{lstlisting}[language=%s]\n", temp_char);
+				printf("\\begin{minted}{%s}\n", temp_char);
 			} else {
-				print_const("\\begin{verbatim}\n");
+				print_const("\\begin{minted}{text}\n");
 			}
 
 			mmd_export_token_tree_latex_raw(out, source, t->child->next, scratch);
 
 			if (temp_char) {
-				print_const("\\end{lstlisting}");
+				print_const("\\end{minted}");
 				free(temp_char);
 			} else {
-				print_const("\\end{verbatim}");
+				print_const("\\end{minted}");
 			}
 
 			scratch->padded = 0;
@@ -225,9 +225,9 @@ void mmd_export_token_beamer(DString * out, const char * source, token * t, scra
 
 		case BLOCK_CODE_INDENTED:
 			pad(out, 2, scratch);
-			print_const("\\begin{verbatim}\n");
+			print_const("\\begin{minted}{text}\n");
 			mmd_export_token_tree_latex_raw(out, source, t->child, scratch);
-			print_const("\\end{verbatim}");
+			print_const("\\end{minted}");
 			scratch->padded = 0;
 			break;
 

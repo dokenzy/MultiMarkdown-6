@@ -114,18 +114,18 @@ void mmd_export_token_memoir(DString * out, const char * source, token * t, scra
 					break;
 				}
 
-				printf("\\begin{adjustwidth}{2.5em}{2.5em}\n\\begin{lstlisting}[language=%s]\n", temp_char);
+				printf("\\begin{adjustwidth}{2.5em}{2.5em}\n\\begin{minted}{%s}\n", temp_char);
 			} else {
-				print_const("\\begin{adjustwidth}{2.5em}{2.5em}\n\\begin{verbatim}\n");
+				print_const("\\begin{adjustwidth}{2.5em}{2.5em}\n\\begin{minted}{text}\n");
 			}
 
 			mmd_export_token_tree_latex_raw(out, source, t->child->next, scratch);
 
 			if (temp_char) {
-				print_const("\\end{lstlisting}\n\\end{adjustwidth}");
+				print_const("\\end{minted}\n\\end{adjustwidth}");
 				free(temp_char);
 			} else {
-				print_const("\\end{verbatim}\n\\end{adjustwidth}");
+				print_const("\\end{minted}\n\\end{adjustwidth}");
 			}
 
 			scratch->padded = 0;
@@ -133,9 +133,9 @@ void mmd_export_token_memoir(DString * out, const char * source, token * t, scra
 
 		case BLOCK_CODE_INDENTED:
 			pad(out, 2, scratch);
-			print_const("\\begin{adjustwidth}{2.5em}{2.5em}\\begin{verbatim}\n");
+			print_const("\\begin{adjustwidth}{2.5em}{2.5em}\\begin{minted}{text}\n");
 			mmd_export_token_tree_latex_raw(out, source, t->child, scratch);
-			print_const("\\end{verbatim}\n\\end{adjustwidth}");
+			print_const("\\end{minted}\n\\end{adjustwidth}");
 			scratch->padded = 0;
 			break;
 
